@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView imgHinhgoc, imgHinhchon;
     String[] arrayhinh;
+    int Request_Code_Image = 123;
     public static ArrayList<String> manghinh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         imgHinhchon = findViewById(R.id.imageviewHinhchon);
         imgHinhgoc = findViewById(R.id.imageviewHinhgoc);
-
 
         arrayhinh = getResources().getStringArray(R.array.Arrayhinh);
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,SothuActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, Request_Code_Image);
             }
         });
 

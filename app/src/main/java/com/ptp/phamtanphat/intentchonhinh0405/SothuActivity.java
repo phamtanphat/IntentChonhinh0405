@@ -1,17 +1,22 @@
 package com.ptp.phamtanphat.intentchonhinh0405;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
+
+import java.util.Collections;
 
 public class SothuActivity extends AppCompatActivity {
 
     TableLayout tableLayout;
-    int index = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,19 +34,27 @@ public class SothuActivity extends AppCompatActivity {
 //
 //        Log.d("BBB",height + "");
 //        Log.d("BBB",width + "");
+        Collections.shuffle(MainActivity.manghinh);
         for (int i = 0 ; i < sohang ; i++){
             TableRow tableRow = new TableRow(this);
             for (int y = 0; y <socot ; y++){
-
                 ImageView imageView = new ImageView(this);
-                index = socot * (i ) + y ;
-                int idhinh = getResources().getIdentifier(MainActivity.manghinh.get(index),"drawable",getPackageName());
+                final int index = socot * (i ) + y ;
+                final int idhinh = getResources().getIdentifier(MainActivity.manghinh.get(index),"drawable",getPackageName());
                 TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(250,250);
                 imageView.setLayoutParams(layoutParams);
                 imageView.setImageResource(idhinh);
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.putExtra("tenhinh",MainActivity.manghinh.get(index));
+                        setResult(RESULT_OK,intent);
+                        finish();
+                    }
+                });
                 tableRow.addView(imageView);
             }
-
             tableLayout.addView(tableRow);
         }
 
